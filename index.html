@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Rayhendra Hanif | Professional Portfolio</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --medical-blue: #0ea5e9;
+            --deep-navy: #0f172a;
+            --accent: #38bdf8;
+            --soft-bg: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--soft-bg); 
+            color: #1e293b; 
+            line-height: 1.6; 
+        }
+
+        .layout {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: #ffffff;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* LEFT SIDEBAR */
+        .sidebar { background: var(--deep-navy); color: white; padding: 50px 40px; }
+        .profile-container { text-align: center; margin-bottom: 40px; }
+        .profile-img { 
+            width: 160px; height: 160px; border-radius: 20px; 
+            object-fit: cover; border: 3px solid var(--accent);
+            transform: rotate(-3deg); background: #334155;
+        }
+        .name { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-top: 15px; }
+        .tagline { color: var(--accent); font-weight: 600; letter-spacing: 1px; font-size: 0.8rem; text-transform: uppercase; }
+
+        .btn-link {
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.05); color: white; text-decoration: none;
+            padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s; font-size: 0.85rem;
+        }
+        .btn-link:hover { background: var(--medical-blue); }
+
+        .section-header { 
+            font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; 
+            letter-spacing: 2px; margin: 30px 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;
+        }
+        
+        .skill-chip { 
+            display: inline-block; background: #1e293b; padding: 4px 10px; 
+            border-radius: 5px; font-size: 0.75rem; margin: 0 4px 6px 0; color: #cbd5e1;
+        }
+
+        /* MAIN CONTENT */
+        .main { padding: 60px; }
+        h2.title { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--deep-navy); margin-bottom: 20px; position: relative; }
+        h2.title::after { content: ""; position: absolute; left: 0; bottom: -5px; width: 40px; height: 3px; background: var(--medical-blue); }
+
+        .about-text { font-size: 1.05rem; color: #475569; margin-bottom: 40px; }
+
+        .timeline-item { position: relative; padding-left: 30px; margin-bottom: 35px; border-left: 2px solid var(--border-color); }
+        .timeline-item::before { 
+            content: ""; position: absolute; left: -7px; top: 0; 
+            width: 12px; height: 12px; border-radius: 50%; background: var(--medical-blue); 
+        }
+        .time-date { font-size: 0.8rem; font-weight: 700; color: var(--medical-blue); text-transform: uppercase; }
+        .role { font-weight: 700; font-size: 1.1rem; display: block; }
+        .place { color: #64748b; font-weight: 500; font-size: 0.9rem; }
+
+        /* IMAGE SLIDER */
+        .achievement-slider {
+            position: relative; width: 100%; height: 350px; 
+            border-radius: 12px; overflow: hidden; background: #000;
+            margin-top: 20px;
+        }
+        .slide {
+            position: absolute; width: 100%; height: 100%; 
+            opacity: 0; transition: opacity 1.2s ease-in-out;
+        }
+        .slide.active { opacity: 1; }
+        .slide img { width: 100%; height: 100%; object-fit: contain; }
+        .caption {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white; padding: 20px; font-size: 0.9rem; text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .layout { grid-template-columns: 1fr; margin: 0; border-radius: 0; }
+            .sidebar { text-align: center; padding: 40px 20px; }
+            .profile-img { transform: none; }
+            .main { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile-container">
+                <img src="YOUR_PROFILE_IMAGE.jpg" class="profile-img" alt="Rayhendra Hanif">
+                <h1 class="name">Rayhendra Hanif</h1>
+                <p class="tagline">Doctor & Medical Researcher</p>
+            </div>
+
+            <div class="section-header">Location</div>
+            <p style="font-size: 0.9rem;">📍 Currently: Pariaman<br>🔜 Coming: Jakarta</p>
+
+            <div class="section-header">Contact & Links</div>
+            <p style="font-size: 0.85rem; margin-bottom: 15px;">📧 rayhendra.hanif@gmail.com<br>📱 +62 813-7836-1518</p>
+            
+            <a href="https://www.linkedin.com/in/rayhendra-hanif" target="_blank" class="btn-link">LinkedIn Profile</a>
+            <!-- Correct placeholder for your ORCID ID -->
+            <a href="https://orcid.org/0000-0000-0000-0000" target="_blank" class="btn-link">ORCID Research ID</a>
+
+            <div class="section-header">Clinical Tools</div>
+            <div class="skills-box">
+                <span class="skill-chip">RevMan 5.4</span>
+                <span class="skill-chip">SPSS</span>
+                <span class="skill-chip">R Studio</span>
+                <span class="skill-chip">STATA</span>
+                <span class="skill-chip">Excel</span>
+            </div>
+
+            <div class="section-header">Language</div>
+            <span class="skill-chip">English (Clinical)</span>
+            <span class="skill-chip">Spanish (Basic)</span>
+            <span class="skill-chip">Indonesian</span>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+            <section>
+                <h2 class="title">Professional Summary</h2>
+                <p class="about-text">
+                    Dedicated Medical Doctor based in South Jakarta with a deep focus on <strong>Cardiovascular Medicine</strong>. 
+                    Proven track record on the front lines—from volunteering during the Aceh floods to 
+                    publishing systematic reviews on cardiac health risks. Committed to bridging the gap between 
+                    advanced research and everyday clinical outcomes.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="title">Recent Experience</h2>
+                
+                <div class="timeline-item">
+                    <span class="time-date">Apr 2026 — Jul 2026</span>
+                    <span class="role">General Practitioner (Intern)</span>
+                    <span class="place">Puskesmas Kurai Taji, Pariaman</span>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">Rotated through Adult/Child Clinics and Emergency Unit management.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="time-date">Feb 2026 — Apr 2026</span>
+                    <span class="role">General Practitioner (Emergency Unit)</span>
+                    <span class="place">RSUD M. Yamin Pariaman</span>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="time-date">May 2025 — Nov 2025</span>
+                    <span class="role">Research Assistant (Pulmonology)</span>
+                    <span class="place">Office of dr. Fanny Fachruricha, Sp.P(K)</span>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">Assisted in literature search and meta-analysis preparation.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="title">Awards & Posters</h2>
+                <p style="font-size: 0.9rem; margin-bottom: 10px;">Select achievements in Pediatric and Cardiac sciences:</p>
+                
+                <div class="achievement-slider">
+                    <!-- Achievement 1 -->
+                    <div class="slide active">
+                        <img src="YOUR_POSTER_1.jpg" alt="Pediatric Update 2024">
+                        <div class="caption">Juara Harapan 1 - E-Poster | Pediatric Update Padang (2024)</div>
+                    </div>
+                    <!-- Achievement 2 -->
+                    <div class="slide">
+                        <img src="YOUR_POSTER_2.jpg" alt="HOPECARDIS 2025">
+                        <div class="caption">Displayed Poster Presentation | HOPECARDIS (2025)</div>
+                    </div>
+                    <!-- Achievement 3 -->
+                    <div class="slide">
+                        <img src="YOUR_PHOTO_OR_POSTER_3.jpg" alt="Padang Symcard 2026">
+                        <div class="caption">Oral Presentation Finalist | Padang Symcard (2026)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-top: 40px;">
+                <h2 class="title">Education</h2>
+                <div class="timeline-item" style="margin-bottom: 10px;">
+                    <span class="role">Medical Clinical Profession (Dokter)</span>
+                    <span class="place">Andalas University | Graduated 2025</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="role">Medical Bachelor (S.Ked)</span>
+                    <span class="place">Andalas University | Graduated 2023</span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script for the Fading Slider -->
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function autoSlide() {
+            slides[slideIndex].classList.remove('active');
+            slideIndex = (slideIndex + 1) % slides.length;
+            slides[slideIndex].classList.add('active');
+        }
+
+        setInterval(autoSlide, 5000); // Transitions every 5 seconds
+    </script>
+
+</body>
+</html>
