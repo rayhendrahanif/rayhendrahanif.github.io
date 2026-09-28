@@ -1,123 +1,51 @@
 # rayhendrahanif.github.io
 
-Personal CV and portfolio site of **dr. Rayhendra Hanif**, a medical doctor and clinical researcher focused on cardiovascular medicine.
+Personal CV website of **dr. Rayhendra Hanif**, a general practitioner and clinical researcher based in South Jakarta.
 
-**Live site:** https://rayhendrahanif.github.io
+**Live:** https://rayhendrahanif.github.io (English) · https://rayhendrahanif.github.io/id/ (Bahasa Indonesia)
 
-It is a hand-written static site: plain HTML, CSS and a few lines of JavaScript. There are no frameworks, no build step and no third-party requests, so it loads fast and deploys to GitHub Pages as is.
+Built with Next.js 15 (App Router, static export), Tailwind CSS 4, Framer Motion and Lucide icons. GitHub Actions builds the site and publishes it to GitHub Pages on every push to `main`.
 
-## Features
+## Design
 
-- Sections: hero with quick actions (Contact, View projects, Download CV), About, Skills, Experience timeline, Featured research, Education & honors, and Contact.
-- A light/dark theme toggle. It follows the visitor's system setting and remembers their choice.
-- Responsive from 320 px phones up to wide desktop monitors.
-- Accessible, semantic HTML with a skip link, landmarks, keyboard-friendly menu and image viewer, reduced-motion support and alt text.
-- Fast: self-hosted fonts, optimized images, lazy-loaded photos, about 230 KB in total. Lighthouse (mobile) scores are 98 Performance, 100 Accessibility, 100 Best Practices and 100 SEO.
-- Print-ready: printing the page produces a clean two-page A4 CV. `cv.pdf` was generated this way.
-- SEO basics: meta description, Open Graph preview image, `Person` structured data, `sitemap.xml`, `robots.txt` and a custom `404.html`.
+- **Palette:** warm paper `#FDFBF7`, slate ink `#1E293B` and a Kemenkes-teal accent. The tokens are at the top of `app/globals.css`, and a matching dark theme is included.
+- **Type:** Newsreader (self-hosted serif) for headings and system-ui for body text.
+- **Layout:** asymmetric hero, numbered sections with a sticky heading column, hairline rules instead of boxed cards, and spacing on an 8-pt grid.
+- **Live Photo hero** (`components/LivePhoto.tsx`): the portrait tilts slowly toward the cursor and plays a short clip on hover (or tap on phones). It shows a small loading skeleton while the image loads and respects reduced-motion settings.
 
-## Project structure
+## Editing content
 
-```
-.
-├── index.html            # All page content lives here
-├── 404.html              # "Page not found" page (served by GitHub Pages)
-├── cv.pdf                # File behind the "Download CV" buttons
-├── assets/
-│   ├── css/styles.css    # All styles (colours are variables at the top)
-│   ├── js/main.js        # Theme toggle, mobile menu, image viewer, copy-email
-│   ├── fonts/            # Inter + Source Serif 4 (SIL Open Font License)
-│   └── img/              # Profile photo, presentation photos, favicon, social image
-├── robots.txt
-├── sitemap.xml
-└── .nojekyll             # Tells GitHub Pages to serve files as-is (no Jekyll build)
-```
+All text lives in **`content/site.ts`**, in English (`en`) and Bahasa Indonesia (`id`). Edit both when you change something. The page layout reads everything from that file.
 
-## Preview locally
+| To change…         | Edit                                                                          |
+| ------------------ | ----------------------------------------------------------------------------- |
+| Any text           | `content/site.ts`                                                             |
+| Downloadable CV    | Replace `public/cv/CV-Rayhendra-Hanif.pdf` (keep the name)                    |
+| Portrait           | `public/images/profile.jpg` (720×720) and `profile-400.jpg` (400×400)          |
+| Live Photo clip    | Put `portrait-live.mp4` + `portrait-live.webm` in `public/media/`, then list them in `person.liveVideo` |
+| Colours            | CSS variables at the top of `app/globals.css`                                 |
 
-Any static file server works. From the repository folder:
+**Live Photo clip tips:** keep it 2–4 seconds, muted and square (720×720), under about 1.5 MB. Export an MP4 (H.264) for Safari/iPhone and a WebM (VP9) for other browsers. On iPhone, open the Live Photo, tap Share, then Save as Video.
+
+## Run locally
 
 ```bash
-python3 -m http.server 8000
-# or: npx serve .
+npm install
+npm run dev      # http://localhost:3000 with live reload
+npm run build    # writes the static site to ./out
+npm start        # serves ./out
 ```
 
-Then open http://localhost:8000. You can also double-click `index.html`, but a local server behaves exactly like GitHub Pages.
+## Deploy to GitHub Pages
 
-## Editing the content
+The workflow in `.github/workflows/deploy.yml` builds the site and deploys it.
 
-Everything is in `index.html`. Each section is marked with a comment banner such as `<!-- ===== EXPERIENCE ===== -->`.
+1. On GitHub, open **Settings → Pages**.
+2. Under **Build and deployment → Source**, choose **GitHub Actions**. This replaces the old "Deploy from a branch" setting and is required, because the site now has a build step.
+3. Merge to `main` (or open **Actions → Deploy to GitHub Pages → Run workflow**). After about a minute the site is live at https://rayhendrahanif.github.io.
 
-| To change…                 | Do this                                                                                                   |
-| -------------------------- | --------------------------------------------------------------------------------------------------------- |
-| A job                      | Copy one `<li class="tl-item">…</li>` block in the Experience section and edit it.                        |
-| A research project         | Copy one `<article class="project-card">…</article>` block. Put the photo in `assets/img/`.                |
-| A photo's crop in its card | Adjust `style="--pos: 50% 35%"` on the `<img>` (horizontal %, vertical %).                                 |
-| Skills / tools             | Edit the `<li class="chip">` items in the Skills section.                                                 |
-| Certifications             | Un-comment the ready-made **Certifications** block in the Education section and fill it in.              |
-| Colours                    | Edit the variables at the top of `assets/css/styles.css` (`--accent` is the teal).                        |
-| Profile photo              | Replace `assets/img/profile.jpg` (720×720) and `assets/img/profile-400.jpg` (400×400) with square images. |
-
-To link a publication, use the commented-out DOI/abstract example in the first project card.
-
-## Updating the CV PDF
-
-The **Download CV** buttons serve `cv.pdf` from the repository root. You have two options:
-
-1. **Use your own CV:** replace `cv.pdf` with your file, keeping the same name.
-2. **Regenerate it from the website** so it always matches the site:
-   - In Chrome or Edge, open the site, press **Ctrl/Cmd + P** and choose **Save as PDF**. Under *More settings*, turn **Headers and footers** off and **Background graphics** on.
-   - Or from a terminal, with the local server running:
-     ```bash
-     google-chrome --headless --no-pdf-header-footer --print-to-pdf=cv.pdf http://localhost:8000/
-     ```
-
-## Deploying to GitHub Pages
-
-This repository is named `rayhendrahanif.github.io`, so GitHub publishes it at **https://rayhendrahanif.github.io**.
-
-### 1. Push the code to GitHub
-
-This repository already exists on GitHub, so commit and push your changes:
-
-```bash
-git add .
-git commit -m "Update portfolio"
-git push origin main
-```
-
-If you work on a separate branch, open a Pull Request on GitHub and merge it into `main`.
-
-<details>
-<summary>Starting from scratch on a new computer or account?</summary>
-
-1. On GitHub, click **New repository** and name it exactly `<your-username>.github.io`. Make it **Public**.
-2. In this project folder, run:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial portfolio"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/<your-username>.github.io.git
-   git push -u origin main
-   ```
-</details>
-
-### 2. Turn on GitHub Pages
-
-1. On GitHub, open the repository and go to **Settings → Pages**.
-2. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
-3. Choose branch **`main`** and folder **`/ (root)`**, then click **Save**.
-4. Wait a minute or two. The **Actions** tab shows the deployment, and the Pages settings show the live URL when it's done.
-5. Visit https://rayhendrahanif.github.io. If you still see an old version, hard-refresh with Ctrl/Cmd + Shift + R.
-
-Every later push to `main` redeploys the site automatically.
-
-### Optional: custom domain
-
-In **Settings → Pages → Custom domain**, enter your domain (e.g. `www.example.com`). Then add a `CNAME` DNS record pointing to `rayhendrahanif.github.io` at your domain provider and tick **Enforce HTTPS** once it's available. Also update the URLs in `index.html` (`canonical`, `og:url`, `og:image`), `sitemap.xml` and `robots.txt`.
+Every later push to `main` redeploys automatically. For a custom domain, add it under **Settings → Pages → Custom domain** and update `metadataBase` in `app/layout.tsx` and the URLs in `public/sitemap.xml` and `public/robots.txt`.
 
 ## Credits
 
-- Fonts: [Inter](https://rsms.me/inter/) and [Source Serif 4](https://github.com/adobe-fonts/source-serif), both under the SIL Open Font License.
-- Icons: adapted from [Lucide](https://lucide.dev) (ISC) and [Simple Icons](https://simpleicons.org) (CC0).
+Newsreader by Production Type (SIL Open Font License). Icons from Lucide (ISC).
