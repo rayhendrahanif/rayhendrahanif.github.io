@@ -2,7 +2,7 @@ import { ArrowUp, ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { CopyEmail } from "@/components/CopyEmail";
 import { Hero } from "@/components/Hero";
-import { PhotoLink } from "@/components/PhotoLink";
+import { PhotoCarousel } from "@/components/PhotoCarousel";
 import { SiteHeader } from "@/components/SiteHeader";
 import { dictionaries, person, type Entry, type Locale } from "@/content/site";
 
@@ -64,11 +64,20 @@ export function Site({ locale }: { locale: Locale }) {
           </Group>
 
           <Group heading={t.research.presentationsHeading}>
-            <ol>
+            <PhotoCarousel
+              slides={t.research.presentations
+                .filter((p) => p.image)
+                .map((p) => ({
+                  ...p.image!,
+                  caption: `${p.outcome ? p.outcome + " — " : ""}${p.format}, ${p.event} (${p.year})`,
+                }))}
+              labels={{ region: t.ui.carousel, previous: t.ui.previousPhoto, next: t.ui.nextPhoto, goTo: t.ui.showPhoto }}
+            />
+            <ol className="mt-8 border-t border-rule">
               {t.research.presentations.map((p) => (
                 <li
                   key={`${p.year}-${p.event}`}
-                  className="grid grid-cols-1 gap-4 border-b border-rule py-8 sm:grid-cols-[8rem_1fr] sm:gap-8 lg:grid-cols-[8rem_1fr_10rem]"
+                  className="grid grid-cols-1 gap-4 border-b border-rule py-8 sm:grid-cols-[8rem_1fr] sm:gap-8"
                 >
                   <p className="figures-tabular text-sm text-ink-faint">{p.year}</p>
                   <div>
@@ -79,19 +88,6 @@ export function Site({ locale }: { locale: Locale }) {
                       <p className="mt-4 inline-block border-l-2 border-teal pl-4 text-sm font-semibold text-ink">{p.outcome}</p>
                     )}
                   </div>
-                  {p.image && (
-                    <div className="max-w-60 sm:col-start-2 lg:col-start-auto">
-                      <PhotoLink
-                        src={p.image.src}
-                        alt={p.image.alt}
-                        width={p.image.width}
-                        height={p.image.height}
-                        position={p.image.position}
-                        caption={`${p.event}, ${p.year}`}
-                        labels={{ view: t.ui.viewPhoto, close: t.ui.closePhoto }}
-                      />
-                    </div>
-                  )}
                 </li>
               ))}
             </ol>
