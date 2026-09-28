@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+/* Dark mode is driven by data-theme on <html> (set before paint in layout.tsx) */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * Palette
+ * Paper #FDFBF7 · Ink #1E293B · Kemenkes teal accent.
+ * `teal` is the fill/line tone; `teal-ink` is the darker shade used for text
+ * so it passes WCAG AA on paper.
+ */
+:root {
+  --paper: #fdfbf7;
+  --paper-2: #f6f2ea;
+  --ink: #1e293b;
+  --ink-soft: #475569;
+  --ink-faint: #64748b;
+  --rule: #e2e8f0;
+  --rule-strong: #cbd5e1;
+  --teal: #00938c;
+  --teal-ink: #006b66;
+  --teal-wash: #e3f1ef;
+}
+
+:root[data-theme="dark"] {
+  --paper: #111716;
+  --paper-2: #18201f;
+  --ink: #e8e4dc;
+  --ink-soft: #b3b8b4;
+  --ink-faint: #8d9591;
+  --rule: #26302e;
+  --rule-strong: #35423f;
+  --teal: #2fb8ae;
+  --teal-ink: #5fd3c9;
+  --teal-wash: #16302d;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-teal: var(--teal);
+  --color-teal-ink: var(--teal-ink);
+  --color-teal-wash: var(--teal-wash);
+
+  --font-serif: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--teal);
+    color: var(--paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer utilities {
+  /* Old-style figures read better inside running serif text */
+  .figures-oldstyle {
+    font-variant-numeric: oldstyle-nums proportional-nums;
+  }
+
+  .figures-tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+}
+
+/* Entrance: pure CSS so content is never hidden if JavaScript fails */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+}
+
+/* Shimmer used by the Live Photo loading skeleton */
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
