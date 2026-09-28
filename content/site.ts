@@ -41,8 +41,10 @@ export type Dictionary = {
     livePlay: string;
     livePause: string;
     liveHint: string;
-    viewPhoto: string;
-    closePhoto: string;
+    carousel: string;
+    previousPhoto: string;
+    nextPhoto: string;
+    showPhoto: string;
     copyEmail: string;
     copied: string;
     backToTop: string;
@@ -172,8 +174,10 @@ const en: Dictionary = {
     livePlay: "Play live photo",
     livePause: "Pause live photo",
     liveHint: "Hover or tap to play",
-    viewPhoto: "View photo",
-    closePhoto: "Close photo",
+    carousel: "Photos from presentations and awards",
+    previousPhoto: "Previous photo",
+    nextPhoto: "Next photo",
+    showPhoto: "Show photo",
     copyEmail: "Copy email address",
     copied: "Copied",
     backToTop: "Back to top",
@@ -418,8 +422,10 @@ const id: Dictionary = {
     livePlay: "Putar foto live",
     livePause: "Jeda foto live",
     liveHint: "Arahkan kursor atau ketuk untuk memutar",
-    viewPhoto: "Lihat foto",
-    closePhoto: "Tutup foto",
+    carousel: "Foto presentasi dan penghargaan",
+    previousPhoto: "Foto sebelumnya",
+    nextPhoto: "Foto berikutnya",
+    showPhoto: "Tampilkan foto",
     copyEmail: "Salin alamat email",
     copied: "Tersalin",
     backToTop: "Kembali ke atas",
