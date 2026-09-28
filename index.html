@@ -85,16 +85,38 @@
             border-radius: 12px; overflow: hidden; background: #000;
             margin-top: 20px;
         }
-        .slide {
-            position: absolute; width: 100%; height: 100%; 
-            opacity: 0; transition: opacity 1.2s ease-in-out;
+        .slider-track {
+            display: flex; height: 100%;
+            transition: transform 0.8s ease-in-out;
         }
-        .slide.active { opacity: 1; }
+        .slide { position: relative; flex: 0 0 100%; height: 100%; }
         .slide img { width: 100%; height: 100%; object-fit: contain; }
         .caption {
             position: absolute; bottom: 0; left: 0; width: 100%;
             background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white; padding: 20px; font-size: 0.9rem; text-align: center;
+            color: white; padding: 20px 20px 30px; font-size: 0.9rem; text-align: center;
+        }
+        .slider-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 40px; height: 40px; border-radius: 50%; border: none;
+            background: rgba(15, 23, 42, 0.6); color: white; font-size: 1.6rem; line-height: 1;
+            cursor: pointer; transition: 0.3s;
+        }
+        .slider-btn:hover { background: var(--medical-blue); }
+        .slider-btn.prev { left: 12px; }
+        .slider-btn.next { right: 12px; }
+        .slider-dots {
+            position: absolute; bottom: 10px; left: 0; width: 100%;
+            display: flex; justify-content: center; gap: 8px;
+        }
+        .slider-dots button {
+            width: 8px; height: 8px; padding: 0; border: none; border-radius: 4px;
+            background: rgba(255,255,255,0.5); cursor: pointer; transition: 0.3s;
+        }
+        .slider-dots button.active { width: 22px; background: var(--accent); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .slider-track { transition: none; }
         }
 
         /* Responsive */
@@ -112,7 +134,7 @@
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="profile-container">
-                <img src="YOUR_PROFILE_IMAGE.jpg" class="profile-img" alt="Rayhendra Hanif">
+                <img src="profile.jpg.jpeg" class="profile-img" alt="Rayhendra Hanif">
                 <h1 class="name">Rayhendra Hanif</h1>
                 <p class="tagline">Doctor & Medical Researcher</p>
             </div>
@@ -182,22 +204,27 @@
                 <h2 class="title">Awards & Posters</h2>
                 <p style="font-size: 0.9rem; margin-bottom: 10px;">Select achievements in Pediatric and Cardiac sciences:</p>
                 
-                <div class="achievement-slider">
-                    <!-- Achievement 1 -->
-                    <div class="slide active">
-                        <img src="YOUR_POSTER_1.jpg" alt="Pediatric Update 2024">
-                        <div class="caption">Juara Harapan 1 - E-Poster | Pediatric Update Padang (2024)</div>
+                <div class="achievement-slider" aria-label="Awards and posters">
+                    <div class="slider-track">
+                        <!-- Achievement 1 -->
+                        <div class="slide">
+                            <img src="poster1.jpg.jpeg" alt="Pediatric Update 2024">
+                            <div class="caption">Juara Harapan 1 - E-Poster | Pediatric Update Padang (2024)</div>
+                        </div>
+                        <!-- Achievement 2 -->
+                        <div class="slide">
+                            <img src="poster2.jpg.jpeg" alt="HOPECARDIS 2025">
+                            <div class="caption">Displayed Poster Presentation | HOPECARDIS (2025)</div>
+                        </div>
+                        <!-- Achievement 3 -->
+                        <div class="slide">
+                            <img src="poster3.jpg.jpeg" alt="Padang Symcard 2026">
+                            <div class="caption">Oral Presentation Finalist | Padang Symcard (2026)</div>
+                        </div>
                     </div>
-                    <!-- Achievement 2 -->
-                    <div class="slide">
-                        <img src="YOUR_POSTER_2.jpg" alt="HOPECARDIS 2025">
-                        <div class="caption">Displayed Poster Presentation | HOPECARDIS (2025)</div>
-                    </div>
-                    <!-- Achievement 3 -->
-                    <div class="slide">
-                        <img src="YOUR_PHOTO_OR_POSTER_3.jpg" alt="Padang Symcard 2026">
-                        <div class="caption">Oral Presentation Finalist | Padang Symcard (2026)</div>
-                    </div>
+                    <button type="button" class="slider-btn prev" aria-label="Previous photo">&#8249;</button>
+                    <button type="button" class="slider-btn next" aria-label="Next photo">&#8250;</button>
+                    <div class="slider-dots"></div>
                 </div>
             </section>
 
@@ -215,18 +242,59 @@
         </main>
     </div>
 
-    <!-- Script for the Fading Slider -->
+    <!-- Script for the Sliding Photos -->
     <script>
+        const slider = document.querySelector('.achievement-slider');
+        const track = slider.querySelector('.slider-track');
+        const slides = slider.querySelectorAll('.slide');
+        const dotsBox = slider.querySelector('.slider-dots');
         let slideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
+        let timer;
 
-        function autoSlide() {
-            slides[slideIndex].classList.remove('active');
-            slideIndex = (slideIndex + 1) % slides.length;
-            slides[slideIndex].classList.add('active');
+        // One dot per photo
+        const dots = Array.from(slides, (_, i) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.setAttribute('aria-label', 'Show photo ' + (i + 1));
+            dot.addEventListener('click', () => { goTo(i); restart(); });
+            dotsBox.appendChild(dot);
+            return dot;
+        });
+
+        function goTo(i) {
+            slideIndex = (i + slides.length) % slides.length;
+            track.style.transform = `translateX(-${slideIndex * 100}%)`;
+            dots.forEach((dot, j) => dot.classList.toggle('active', j === slideIndex));
         }
 
-        setInterval(autoSlide, 5000); // Transitions every 5 seconds
+        function restart() {
+            clearInterval(timer);
+            timer = setInterval(() => goTo(slideIndex + 1), 5000); // Slides every 5 seconds
+        }
+
+        slider.querySelector('.prev').addEventListener('click', () => { goTo(slideIndex - 1); restart(); });
+        slider.querySelector('.next').addEventListener('click', () => { goTo(slideIndex + 1); restart(); });
+
+        // Pause while the mouse is over the photos
+        slider.addEventListener('mouseenter', () => clearInterval(timer));
+        slider.addEventListener('mouseleave', restart);
+
+        // Swipe left/right on phones
+        let touchStartX = null;
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            clearInterval(timer);
+        }, { passive: true });
+        slider.addEventListener('touchend', (e) => {
+            if (touchStartX === null) return;
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) > 40) goTo(slideIndex + (dx < 0 ? 1 : -1));
+            touchStartX = null;
+            restart();
+        });
+
+        goTo(0);
+        restart();
     </script>
 
 </body>
