@@ -20,7 +20,6 @@ All text lives in **`content/site.ts`**, in English (`en`) and Bahasa Indonesia 
 | To change…         | Edit                                                                          |
 | ------------------ | ----------------------------------------------------------------------------- |
 | Any text           | `content/site.ts`                                                             |
-| Downloadable CV    | Replace `public/cv/CV-Rayhendra-Hanif.pdf` (keep the name)                    |
 | Portrait           | `public/images/profile.jpg` (720×720) and `profile-400.jpg` (400×400)          |
 | Live Photo clip    | Put `portrait-live.mp4` + `portrait-live.webm` in `public/media/`, then list them in `person.liveVideo` |
 | Colours            | CSS variables at the top of `app/globals.css`                                 |
