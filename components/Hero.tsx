@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import { ArrowDownRight } from "lucide-react";
 import { LivePhoto } from "@/components/LivePhoto";
 import { person, type Dictionary } from "@/content/site";
 
@@ -38,12 +38,11 @@ export function Hero({ hero, ui, facts }: Props) {
               <ArrowDownRight size={16} strokeWidth={2} className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
             </a>
             <a
-              href={person.cv}
-              download="CV-Rayhendra-Hanif.pdf"
+              href="#research"
               className="group inline-flex items-center gap-2 border-b border-ink pb-1 text-sm font-semibold text-ink transition-colors hover:border-teal-ink hover:text-teal-ink"
             >
-              {ui.downloadCv}
-              <ArrowUpRight size={16} strokeWidth={2} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              {ui.research}
+              <ArrowDownRight size={16} strokeWidth={2} className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
             </a>
           </div>
 

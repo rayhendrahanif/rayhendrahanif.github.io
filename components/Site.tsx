@@ -204,15 +204,6 @@ export function Site({ locale }: { locale: Locale }) {
                     </a>
                   </li>
                 ))}
-                <li className="border-b border-rule">
-                  <a href={person.cv} download="CV-Rayhendra-Hanif.pdf" className="group flex items-baseline justify-between gap-4 py-4 text-ink">
-                    <span className="text-sm text-ink-faint">CV</span>
-                    <span className="inline-flex items-center gap-2 group-hover:text-teal-ink">
-                      {t.ui.downloadCv} (PDF)
-                      <ArrowUpRight size={16} strokeWidth={1.75} />
-                    </span>
-                  </a>
-                </li>
               </ul>
             </div>
           </div>
