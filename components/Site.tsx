@@ -2,6 +2,7 @@ import { ArrowUp, ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { CopyEmail } from "@/components/CopyEmail";
 import { Hero } from "@/components/Hero";
+import { Intro } from "@/components/Intro";
 import { PhotoCarousel } from "@/components/PhotoCarousel";
 import { SiteHeader } from "@/components/SiteHeader";
 import { dictionaries, person, type Entry, type Locale } from "@/content/site";
@@ -34,6 +35,7 @@ export function Site({ locale }: { locale: Locale }) {
       <SiteHeader locale={locale} nav={t.nav} ui={t.ui} />
 
       <main id="main">
+        <Intro t={t.intro} />
         <Hero hero={t.hero} ui={t.ui} facts={t.facts} />
 
         <Section id="profile" number="01" heading={t.profile.heading}>
