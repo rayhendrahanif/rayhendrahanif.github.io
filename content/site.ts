@@ -1,6 +1,6 @@
 /**
  * All site copy lives here, in English and Bahasa Indonesia.
- * Source: CV_Rayhendra_Hanif_ATS_Indonesian.pdf (September 2026).
+ * Source: CV (September 2026). The CV file itself is intentionally not published.
  * Edit this file to update the website; the layout reads everything from it.
  */
 
@@ -34,7 +34,6 @@ export type Dictionary = {
     themeToDark: string;
     themeToLight: string;
     langLabel: string;
-    downloadCv: string;
     contact: string;
     research: string;
     present: string;
@@ -103,7 +102,6 @@ export const person = {
   email: "rayhendra.hanif@gmail.com",
   phoneDisplay: "+62 813-7836-1518",
   phoneHref: "tel:+6281378361518",
-  cv: "/cv/CV-Rayhendra-Hanif.pdf",
   portrait: {
     src: "/images/profile.jpg",
     srcSet: "/images/profile-400.jpg 400w, /images/profile.jpg 720w",
@@ -167,7 +165,6 @@ const en: Dictionary = {
     themeToDark: "Switch to dark theme",
     themeToLight: "Switch to light theme",
     langLabel: "Language",
-    downloadCv: "Download CV",
     contact: "Get in touch",
     research: "Research",
     present: "Present",
@@ -415,7 +412,6 @@ const id: Dictionary = {
     themeToDark: "Ganti ke tema gelap",
     themeToLight: "Ganti ke tema terang",
     langLabel: "Bahasa",
-    downloadCv: "Unduh CV",
     contact: "Hubungi saya",
     research: "Riset",
     present: "Sekarang",
