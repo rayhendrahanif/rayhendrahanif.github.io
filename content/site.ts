@@ -24,8 +24,23 @@ export type Presentation = {
   image?: { src: string; alt: string; width: number; height: number; position?: string };
 };
 
+export type Media = { type: "image" | "video"; src: string; poster?: string; position?: string };
+
 export type Dictionary = {
   meta: { title: string; description: string };
+  intro: {
+    eyebrow: string;
+    subtitle: string;
+    ctaContact: string;
+    ctaWork: string;
+    scroll: string;
+    showcaseAlt: string;
+    lines: string[];
+    highlightsHeading: string;
+    highlights: { title: string; caption: string; alt: string }[];
+    previous: string;
+    next: string;
+  };
   nav: { id: string; label: string }[];
   ui: {
     skip: string;
@@ -115,10 +130,25 @@ export const person = {
    * While this is empty the portrait still tilts, but no "Live" badge is shown.
    */
   liveVideo: [] as { src: string; type: string }[],
+  /**
+   * Media for the Apple-style opening. Swap any entry for your own photo or video:
+   *   { type: "video", src: "/media/clip.mp4", poster: "/media/clip.jpg" }
+   * Put the files in /public/media/. Landscape 16:9 works best for `showcase`,
+   * portrait 4:5 for `highlights`. Highlight captions live in the dictionaries below,
+   * in the same order.
+   */
+  introMedia: {
+    showcase: { type: "image", src: "/images/symcard-2026.jpg", position: "50% 40%" } as Media,
+    highlights: [
+      { type: "image", src: "/images/profile.jpg", position: "50% 30%" },
+      { type: "image", src: "/images/symcard-2026.jpg", position: "50% 45%" },
+      { type: "image", src: "/images/hopecardis-2025.jpg", position: "50% 40%" },
+      { type: "image", src: "/images/pediatric-update-2024.jpg", position: "62% 50%" },
+    ] as Media[],
+  },
   links: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/rayhendra-hanif-32164b190/", handle: "in/rayhendra-hanif" },
     { label: "ORCID", href: "https://orcid.org/0009-0004-8234-2772", handle: "0009-0004-8234-2772" },
-    { label: "GitHub", href: "https://github.com/rayhendrahanif", handle: "@rayhendrahanif" },
   ],
 };
 
@@ -151,6 +181,24 @@ const en: Dictionary = {
     description:
       "General practitioner based in South Jakarta: Ministry of Health disaster deployments, emergency and primary care, and cardiovascular research.",
   },
+  intro: {
+    eyebrow: "General Practitioner · Clinical Researcher",
+    subtitle: "Frontline care. Informed by research.",
+    ctaContact: "Get in touch",
+    ctaWork: "See the work",
+    scroll: "Scroll",
+    showcaseAlt: "Rayhendra Hanif presenting at the 11th Padang SymCARD",
+    lines: ["Three Ministry of Health deployments.", "Emergency rooms with limited equipment.", "Research at Harapan Kita."],
+    highlightsHeading: "Highlights.",
+    highlights: [
+      { title: "On deployment", caption: "Ministry of Health disaster response, 2025–2026", alt: "Rayhendra Hanif in a Ministry of Health field vest" },
+      { title: "SymCARD 2026", caption: "Oral presenter, Padang", alt: "Rayhendra Hanif presenting at SymCARD 2026" },
+      { title: "HOPECARDIS 2025", caption: "Systematic review and meta-analysis poster", alt: "Rayhendra Hanif beside his HOPECARDIS 2025 poster" },
+      { title: "Pediatric Update 2024", caption: "Juara Harapan 1, poster presentation", alt: "Rayhendra Hanif receiving a poster award" },
+    ],
+    previous: "Previous",
+    next: "Next",
+  },
   nav: [
     { id: "profile", label: "Profile" },
     { id: "training", label: "Training" },
@@ -178,11 +226,11 @@ const en: Dictionary = {
     copyEmail: "Copy email address",
     copied: "Copied",
     backToTop: "Back to top",
-    footer: "Designed and built in Jakarta. Hosted on GitHub Pages.",
+    footer: "Designed and built in Jakarta.",
   },
   hero: {
     kicker: "General Practitioner · Clinical Researcher",
-    title: "Frontline care, informed by research.",
+    title: "Clinician, researcher, first responder.",
     summary:
       "A doctor from Padang, now based in South Jakarta. I've led emergency care on Ministry of Health disaster deployments in Aceh and East Nusa Tenggara, and I'm currently a research assistant at the National Cardiovascular Center Harapan Kita.",
     based: "South Jakarta, Indonesia",
@@ -398,6 +446,24 @@ const id: Dictionary = {
     description:
       "Dokter umum di Jakarta Selatan: penugasan bencana Kementerian Kesehatan, pelayanan gawat darurat dan primer, serta riset kardiovaskular.",
   },
+  intro: {
+    eyebrow: "Dokter Umum · Peneliti Klinis",
+    subtitle: "Pelayanan garis depan. Berbasis riset.",
+    ctaContact: "Hubungi saya",
+    ctaWork: "Lihat karya",
+    scroll: "Gulir",
+    showcaseAlt: "Rayhendra Hanif mempresentasikan di 11th Padang SymCARD",
+    lines: ["Tiga penugasan bencana Kemenkes.", "IGD dengan alat terbatas.", "Riset di RS Harapan Kita."],
+    highlightsHeading: "Sorotan.",
+    highlights: [
+      { title: "Penugasan bencana", caption: "Kementerian Kesehatan, 2025–2026", alt: "Rayhendra Hanif mengenakan rompi lapangan Kementerian Kesehatan" },
+      { title: "SymCARD 2026", caption: "Presenter oral, Padang", alt: "Rayhendra Hanif mempresentasikan di SymCARD 2026" },
+      { title: "HOPECARDIS 2025", caption: "Poster systematic review dan meta-analisis", alt: "Rayhendra Hanif di samping posternya di HOPECARDIS 2025" },
+      { title: "Pediatric Update 2024", caption: "Juara Harapan 1 presentasi poster", alt: "Rayhendra Hanif menerima penghargaan poster" },
+    ],
+    previous: "Sebelumnya",
+    next: "Berikutnya",
+  },
   nav: [
     { id: "profile", label: "Profil" },
     { id: "training", label: "Pendidikan" },
@@ -425,11 +491,11 @@ const id: Dictionary = {
     copyEmail: "Salin alamat email",
     copied: "Tersalin",
     backToTop: "Kembali ke atas",
-    footer: "Dirancang dan dibangun di Jakarta. Di-hosting di GitHub Pages.",
+    footer: "Dirancang dan dibangun di Jakarta.",
   },
   hero: {
     kicker: "Dokter Umum · Peneliti Klinis",
-    title: "Pelayanan garis depan, berbasis riset.",
+    title: "Klinisi, peneliti, tenaga medis garis depan.",
     summary:
       "Dokter asal Padang yang kini berdomisili di Jakarta Selatan. Saya menangani kegawatdaruratan dalam penugasan bencana Kementerian Kesehatan di Aceh dan Nusa Tenggara Timur, dan saat ini menjadi asisten peneliti di RS Jantung dan Pembuluh Darah Harapan Kita.",
     based: "Jakarta Selatan, Indonesia",

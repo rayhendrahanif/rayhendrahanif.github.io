@@ -6,24 +6,18 @@ type Props = { hero: Dictionary["hero"]; ui: Dictionary["ui"]; facts: Dictionary
 
 export function Hero({ hero, ui, facts }: Props) {
   return (
-    <section id="top" aria-labelledby="hero-name" className="relative pt-24 sm:pt-32">
+    <section id="about-me" aria-labelledby="hero-name" className="relative pt-24 sm:pt-32">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-16 px-4 sm:px-8 lg:grid-cols-12 lg:gap-8">
         {/* Left: type-led column */}
         <div className="lg:col-span-7 lg:pt-16">
           <p className="rise text-xs font-semibold tracking-[0.2em] text-teal-ink uppercase">{hero.kicker}</p>
 
-          <h1
+          <h2
             id="hero-name"
-            className="rise mt-8 font-serif text-[clamp(3.5rem,11vw,7.5rem)] leading-[0.92] font-medium tracking-[-0.03em] text-ink [animation-delay:80ms]"
+            className="rise mt-8 max-w-2xl font-serif text-[clamp(2.75rem,7vw,5.5rem)] leading-[0.98] font-medium tracking-[-0.03em] text-ink [animation-delay:80ms]"
           >
-            Rayhendra
-            <br />
-            <span className="ml-[0.6em] italic">Hanif</span>
-          </h1>
-
-          <p className="rise mt-8 max-w-md font-serif text-2xl leading-snug text-ink italic [animation-delay:160ms]">
             {hero.title}
-          </p>
+          </h2>
 
           <p className="rise mt-8 max-w-xl text-base leading-relaxed text-ink-soft [animation-delay:240ms] sm:text-lg">
             {hero.summary}

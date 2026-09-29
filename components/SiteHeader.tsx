@@ -12,12 +12,17 @@ const homeFor = (locale: Locale) => (locale === "id" ? "/id/" : "/");
 export function SiteHeader({ locale, nav, ui }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [onDark, setOnDark] = useState(true);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const pendingTarget = useRef<string | null>(null);
 
   useEffect(() => {
     setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      const intro = document.getElementById("intro");
+      setOnDark(intro ? intro.getBoundingClientRect().bottom > 32 : false);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -45,6 +50,7 @@ export function SiteHeader({ locale, nav, ui }: Props) {
 
   return (
     <header
+      data-ondark={onDark}
       className={`fixed inset-x-0 top-0 z-40 border-b bg-paper/90 backdrop-blur-md transition-colors duration-300 ${
         scrolled || open ? "border-rule" : "border-transparent"
       }`}

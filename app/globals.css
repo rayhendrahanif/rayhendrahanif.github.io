@@ -35,6 +35,19 @@
   --teal-wash: #16302d;
 }
 
+/* Header over the always-dark intro: swap its tokens locally (Apple-style dark glass) */
+header[data-ondark="true"] {
+  --paper: #050a0a;
+  --paper-2: #111716;
+  --ink: #f5f5f4;
+  --ink-soft: #c3c9c6;
+  --ink-faint: #8a918e;
+  --rule: rgba(255, 255, 255, 0.12);
+  --rule-strong: rgba(255, 255, 255, 0.28);
+  --teal-ink: #5fd3c9;
+  --teal: #2fb8ae;
+}
+
 @theme inline {
   --color-paper: var(--paper);
   --color-paper-2: var(--paper-2);
